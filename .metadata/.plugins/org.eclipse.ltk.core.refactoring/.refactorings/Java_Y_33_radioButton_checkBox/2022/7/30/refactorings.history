@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 4 packages to &apos;Java_Y_34_JComboBOx_jList/src&apos;&#x0D;&#x0A;- Original project: &apos;Java_Y_33_radioButton_checkBox&apos;&#x0D;&#x0A;- Destination element: &apos;Java_Y_34_JComboBOx_jList/src&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     Java_Y_33_radioButton_checkBox/src/view&#x0D;&#x0A;     Java_Y_33_radioButton_checkBox/src/controller&#x0D;&#x0A;     Java_Y_33_radioButton_checkBox/src/model&#x0D;&#x0A;     Java_Y_33_radioButton_checkBox/src/test" description="Copy packages" destination="=Java_Y_34_JComboBOx_jList/src" element1="/src&lt;view" element2="/src&lt;controller" element3="/src&lt;model" element4="/src&lt;test" flags="589830" fragments="4" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1658570255086" version="1.0"/>
+</session>

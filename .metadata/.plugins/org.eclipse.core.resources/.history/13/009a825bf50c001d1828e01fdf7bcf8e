@@ -1,0 +1,7 @@
+package model;
+
+public class thiSinh extends tinhThanh{
+	private int maThiSinh;
+	private String tenThiSinh;
+	private tinhThanh queQuan;
+}

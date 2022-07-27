@@ -1,0 +1,608 @@
+package view;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import model.quanLySV;
+import model.thiSinh;
+import model.tinhThanh;
+
+import java.awt.BorderLayout;
+import javax.swing.JList;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JSeparator;
+import javax.swing.ImageIcon;
+import java.awt.Toolkit;
+import javax.swing.Box;
+import javax.swing.ButtonGroup;
+import javax.swing.border.BevelBorder;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
+
+import controller.dieuKienGiaoDien;
+
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Set;
+import java.util.TreeSet;
+import java.awt.event.ActionEvent;
+import javax.swing.JCheckBox;
+import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
+
+public class giaoDienQuanLySV extends JFrame {
+	public quanLySV qlsv;
+	public JPanel contentPane;
+	public JTable table;
+	public JTextField textField_ID;
+	public JTextField textField_Ten;
+	public JTextField textField_ngSinh;
+	public JTextField textField_Diem1;
+	public JTextField textField_Diem2;
+	public JTextField textField_Diem3;
+	public JTextField textField_maThiSinh_timKiem;
+	public ButtonGroup buttonGroup;
+	public JComboBox comboBox_timKiem;
+	public JComboBox comboBox_them;
+	public JRadioButton btn_Nam;
+	public JRadioButton btn_Nu;
+	public JButton btnHyTm;
+	private JButton btnNewButton;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					giaoDienQuanLySV frame = new giaoDienQuanLySV();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public giaoDienQuanLySV() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				"C:\\Users\\admin\\OneDrive - Hanoi University of Mining and Geology\\Pictures\\Saved Pictures\\batman-icon.png"));
+		this.qlsv = new quanLySV();
+		this.setTitle("Ứng dụng quản lý thông tin sinh viên");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 948, 760);
+
+		ActionListener ac = new dieuKienGiaoDien(this);
+
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+
+		JMenu mnNewMenu = new JMenu("File");
+		mnNewMenu.setIcon(new ImageIcon(
+				"C:\\Users\\admin\\OneDrive - Hanoi University of Mining and Geology\\Pictures\\Saved Pictures\\New-file-icon.png"));
+		mnNewMenu.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		menuBar.add(mnNewMenu);
+
+		JMenuItem mntmNewMenuItem = new JMenuItem("Open");
+		mntmNewMenuItem.setIcon(new ImageIcon(
+				"C:\\Users\\admin\\OneDrive - Hanoi University of Mining and Geology\\Pictures\\Saved Pictures\\Folder-Open-icon.png"));
+		mntmNewMenuItem.addActionListener(ac);
+		mnNewMenu.add(mntmNewMenuItem);
+
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Save\r\n");
+		mntmNewMenuItem_1.setIcon(new ImageIcon("C:\\Users\\admin\\OneDrive - Hanoi University of Mining and Geology\\Pictures\\Saved Pictures\\Save-icon.png"));
+		mntmNewMenuItem_1.addActionListener(ac);
+		mnNewMenu.add(mntmNewMenuItem_1);
+
+		JSeparator separator = new JSeparator();
+		mnNewMenu.add(separator);
+
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Exit");
+		mntmNewMenuItem_2.addActionListener(ac);
+		mntmNewMenuItem_2.setIcon(new ImageIcon(
+				"C:\\Users\\admin\\OneDrive - Hanoi University of Mining and Geology\\Pictures\\Saved Pictures\\Exit.png"));
+		mnNewMenu.add(mntmNewMenuItem_2);
+
+		JMenu mnNewMenu_1 = new JMenu("About");
+		mnNewMenu_1.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		menuBar.add(mnNewMenu_1);
+
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("About Me");
+		mntmNewMenuItem_3.addActionListener(ac);
+		mntmNewMenuItem_3.setIcon(new ImageIcon(
+				"C:\\Users\\admin\\OneDrive - Hanoi University of Mining and Geology\\Pictures\\Saved Pictures\\About Me.png"));
+		mnNewMenu_1.add(mntmNewMenuItem_3);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		JLabel lblNewLabel = new JLabel("Quê Quán");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel.setBounds(63, 23, 92, 30);
+		contentPane.add(lblNewLabel);
+
+		comboBox_timKiem = new JComboBox();
+		ArrayList<tinhThanh> listTinh = tinhThanh.getDSTinh();
+		comboBox_timKiem.addItem("");
+		for (tinhThanh tinh : listTinh) {
+			comboBox_timKiem.addItem(tinh.getTenTinh());
+		}
+		comboBox_timKiem.setBounds(164, 22, 92, 34);
+		contentPane.add(comboBox_timKiem);
+
+		btnNewButton = new JButton("Tìm");
+		btnNewButton.addActionListener(ac);
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnNewButton.setBounds(523, 25, 107, 30);
+		contentPane.add(btnNewButton);
+
+		btnHyTm = new JButton("Hủy Tìm");
+		btnHyTm.addActionListener(ac);
+		btnHyTm.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnHyTm.setBounds(657, 26, 107, 30);
+		contentPane.add(btnHyTm);
+
+		JLabel lblMThSinh = new JLabel("Mã Thí Sinh");
+		lblMThSinh.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMThSinh.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblMThSinh.setBounds(276, 23, 92, 30);
+		contentPane.add(lblMThSinh);
+
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBounds(42, 81, 843, 2);
+		contentPane.add(separator_1);
+
+		JLabel lblDanhSchSinh = new JLabel("Danh sách thí sinh");
+		lblDanhSchSinh.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDanhSchSinh.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblDanhSchSinh.setBounds(38, 106, 159, 30);
+		contentPane.add(lblDanhSchSinh);
+
+		table = new JTable();
+		table.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Mã thí sinh", "Họ và Tên", "Quê quán",
+				"Giới tính", "Năm sinh", "Điểm 1", "Điểm 2", "Điểm 3" }));
+
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(20, 151, 865, 213);
+		contentPane.add(scrollPane);
+
+		JSeparator separator_1_1 = new JSeparator();
+		separator_1_1.setBounds(38, 387, 843, 2);
+		contentPane.add(separator_1_1);
+
+		JLabel lblThngTinTh = new JLabel("Thông tin thí sinh");
+		lblThngTinTh.setHorizontalAlignment(SwingConstants.CENTER);
+		lblThngTinTh.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblThngTinTh.setBounds(42, 387, 150, 30);
+		contentPane.add(lblThngTinTh);
+
+		JLabel ID = new JLabel("ID");
+		ID.setHorizontalAlignment(SwingConstants.CENTER);
+		ID.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		ID.setBounds(10, 427, 92, 30);
+		contentPane.add(ID);
+
+		JLabel lblTen = new JLabel("Tên");
+		lblTen.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTen.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTen.setBounds(10, 467, 92, 30);
+		contentPane.add(lblTen);
+
+		JLabel lblNgySinh = new JLabel("Ngày Sinh");
+		lblNgySinh.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNgySinh.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNgySinh.setBounds(10, 507, 92, 30);
+		contentPane.add(lblNgySinh);
+
+		JLabel lblNewLabel_4 = new JLabel("Quê Quán");
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_4.setBounds(10, 547, 92, 30);
+		contentPane.add(lblNewLabel_4);
+
+		JLabel lblGiiTnh = new JLabel("Giới tính");
+		lblGiiTnh.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGiiTnh.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblGiiTnh.setBounds(10, 587, 92, 30);
+		contentPane.add(lblGiiTnh);
+
+		JLabel lblim = new JLabel("Điểm 1");
+		lblim.setHorizontalAlignment(SwingConstants.CENTER);
+		lblim.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblim.setBounds(506, 427, 92, 30);
+		contentPane.add(lblim);
+
+		JLabel lblim_1 = new JLabel("Điểm 2");
+		lblim_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblim_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblim_1.setBounds(506, 478, 92, 30);
+		contentPane.add(lblim_1);
+
+		JLabel lblim_2 = new JLabel("Điểm 3");
+		lblim_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblim_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblim_2.setBounds(506, 532, 92, 30);
+		contentPane.add(lblim_2);
+
+		JSeparator separator_1_2 = new JSeparator();
+		separator_1_2.setBounds(20, 630, 843, 2);
+		contentPane.add(separator_1_2);
+
+		JButton btnInsert = new JButton("Thêm");
+		btnInsert.addActionListener(ac);
+		btnInsert.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnInsert.setBounds(48, 653, 107, 30);
+		contentPane.add(btnInsert);
+
+		JButton btnDelete = new JButton("Xóa");
+		btnDelete.addActionListener(ac);
+		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnDelete.setBounds(232, 653, 107, 30);
+		contentPane.add(btnDelete);
+
+		JButton btnEdit = new JButton("Cập nhật");
+		btnEdit.addActionListener(ac);
+		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnEdit.setBounds(399, 653, 107, 30);
+		contentPane.add(btnEdit);
+
+		JButton btnOk = new JButton("Lưu");
+		btnOk.addActionListener(ac);
+		btnOk.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnOk.setBounds(557, 653, 107, 30);
+		contentPane.add(btnOk);
+
+		JButton btnCancel = new JButton("Hủy bỏ");
+		btnCancel.addActionListener(ac);
+		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnCancel.setBounds(724, 653, 107, 30);
+		contentPane.add(btnCancel);
+
+		textField_ID = new JTextField();
+		textField_ID.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textField_ID.setBounds(112, 435, 306, 19);
+		contentPane.add(textField_ID);
+		textField_ID.setColumns(10);
+
+		textField_Ten = new JTextField();
+		textField_Ten.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textField_Ten.setColumns(10);
+		textField_Ten.setBounds(112, 475, 306, 19);
+		contentPane.add(textField_Ten);
+
+		textField_ngSinh = new JTextField();
+		textField_ngSinh.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textField_ngSinh.setColumns(10);
+		textField_ngSinh.setBounds(112, 515, 306, 19);
+		contentPane.add(textField_ngSinh);
+
+		textField_Diem1 = new JTextField();
+		textField_Diem1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textField_Diem1.setColumns(10);
+		textField_Diem1.setBounds(589, 435, 306, 19);
+		contentPane.add(textField_Diem1);
+
+		textField_Diem2 = new JTextField();
+		textField_Diem2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textField_Diem2.setColumns(10);
+		textField_Diem2.setBounds(589, 486, 306, 19);
+		contentPane.add(textField_Diem2);
+
+		textField_Diem3 = new JTextField();
+		textField_Diem3.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textField_Diem3.setColumns(10);
+		textField_Diem3.setBounds(589, 540, 306, 19);
+		contentPane.add(textField_Diem3);
+
+		comboBox_them = new JComboBox();
+		ArrayList<tinhThanh> tinh2 = tinhThanh.getDSTinh();
+		comboBox_them.addItem("");
+		for (tinhThanh tinhThanh2 : tinh2) {
+			comboBox_them.addItem(tinhThanh2.getTenTinh());
+		}
+		comboBox_them.setBounds(112, 547, 306, 34);
+		contentPane.add(comboBox_them);
+
+		btn_Nam = new JRadioButton("Nam");
+		btn_Nam.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btn_Nam.setBounds(112, 594, 103, 21);
+		contentPane.add(btn_Nam);
+
+		btn_Nu = new JRadioButton("Nữ");
+		btn_Nu.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btn_Nu.setBounds(223, 594, 103, 21);
+		contentPane.add(btn_Nu);
+		buttonGroup = new ButtonGroup();
+		buttonGroup.add(btn_Nam);
+		buttonGroup.add(btn_Nu);
+
+		textField_maThiSinh_timKiem = new JTextField();
+		textField_maThiSinh_timKiem.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textField_maThiSinh_timKiem.setColumns(10);
+		textField_maThiSinh_timKiem.setBounds(367, 24, 135, 33);
+		contentPane.add(textField_maThiSinh_timKiem);
+		this.setVisible(true);
+	}
+
+	
+	public void themThiSinhVaoTable(thiSinh ts) {
+		DefaultTableModel model_table = (DefaultTableModel) table.getModel();
+		model_table.addRow(new Object[] { ts.getMaThiSinh() + "", ts.getTenThiSinh() + "", ts.getQueQuan().getTenTinh(),
+				(ts.isGioiTinh() ? "Nam" : "Nữ"),
+				ts.getNamSinh().getDate() + "/" + (ts.getNamSinh().getMonth() + 1) + "/"
+						+ (ts.getNamSinh().getYear() + 1900),
+				ts.getDiem1() + "", ts.getDiem2() + "", ts.getDiem3() + "" });
+	}
+
+	public void xoaFrom() {
+		this.textField_ID.setText("");
+		this.textField_Ten.setText("");
+		this.textField_ngSinh.setText("");
+		this.textField_Diem1.setText("");
+		this.textField_Diem2.setText("");
+		this.textField_Diem3.setText("");
+		comboBox_them.setSelectedIndex(-1);
+		buttonGroup.clearSelection();
+	}
+
+	public void themSinhVien(thiSinh ts) {
+		DefaultTableModel model_table = (DefaultTableModel) table.getModel();
+		if (!this.qlsv.kiemTraTonTai(ts)) {
+			this.qlsv.insert(ts);
+			this.themThiSinhVaoTable(ts);
+		} else {
+			this.qlsv.update(ts);
+			int soLuongDong = model_table.getRowCount();
+			for (int i = 0; i < soLuongDong; i++) {
+				String id = model_table.getValueAt(i, 0) + "";
+				if (id.equals(ts.getMaThiSinh() + "")) {
+					model_table.setValueAt(ts.getMaThiSinh() + "", i, 0);
+					model_table.setValueAt(ts.getTenThiSinh() + "", i, 1);
+					model_table.setValueAt(ts.getQueQuan().getTenTinh() + "", i, 2);
+					model_table.setValueAt((ts.isGioiTinh() ? "Nam" : "Nữ") + "", i, 3);
+					model_table.setValueAt(ts.getNamSinh().getDate() + "/" + (ts.getNamSinh().getMonth() + 1) + "/"
+							+ (ts.getNamSinh().getYear() + 1900), i, 4);
+					model_table.setValueAt(ts.getDiem1() + "", i, 5);
+					model_table.setValueAt(ts.getDiem2() + "", i, 6);
+					model_table.setValueAt(ts.getDiem3() + "", i, 7);
+				}
+			}
+		}
+	}
+	public thiSinh getThiSinh() {
+		DefaultTableModel model_table = (DefaultTableModel) table.getModel();
+		int i_row = table.getSelectedRow();
+
+		int maThiSinh = Integer.valueOf(model_table.getValueAt(i_row, 0) + "");
+		String tenThiSinh = model_table.getValueAt(i_row, 1) + "";
+		tinhThanh tinh = tinhThanh.getTinhbyTen(model_table.getValueAt(i_row, 2) + "");
+		String textGioiTinh = model_table.getValueAt(i_row, 3) + "";
+		boolean gioiTinh = textGioiTinh.equals("Nam");
+		String s_ngaySinh = model_table.getValueAt(i_row, 4) + "";
+		Date namSinh = new Date(s_ngaySinh);
+		float diem1 = Float.valueOf(model_table.getValueAt(i_row, 5) + "");
+		float diem2 = Float.valueOf(model_table.getValueAt(i_row, 6) + "");
+		float diem3 = Float.valueOf(model_table.getValueAt(i_row, 7) + "");
+		
+		thiSinh ts = new thiSinh(maThiSinh, tenThiSinh, tinh, namSinh, gioiTinh, diem1, diem3, diem2);
+		return ts;
+	}
+	public void capNhatSinhVien() {
+		thiSinh ts = getThiSinh();
+		this.textField_ID.setText(ts.getMaThiSinh() + "");
+		this.textField_Ten.setText(ts.getTenThiSinh() + "");
+		this.comboBox_them.setSelectedItem(ts.getQueQuan().getTenTinh());
+		if (ts.isGioiTinh()) {
+			btn_Nam.setSelected(true);
+		} else {
+			btn_Nu.setSelected(true);
+		}
+		this.textField_ngSinh.setText(ts.getNamSinh().getDate() + "/" + (ts.getNamSinh().getMonth() + 1) + "/"
+				+ (ts.getNamSinh().getYear() + 1900) + "");
+		this.textField_Diem1.setText(ts.getDiem1() + "");
+		this.textField_Diem2.setText(ts.getDiem2() + "");
+		this.textField_Diem3.setText(ts.getDiem3() + "");
+	}
+
+	public void thucHienXoa() {
+		DefaultTableModel model_table = (DefaultTableModel) table.getModel();
+		int i_row = table.getSelectedRow();
+		int luaChon = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn xóa dòng này");
+		if (luaChon == JOptionPane.YES_OPTION) {
+			thiSinh ts = getThiSinh();
+			this.qlsv.delete(ts);
+			model_table.removeRow(i_row);
+
+		}
+	}
+
+	public void thucHienThem() {
+		int maThiSinh = Integer.valueOf(this.textField_ID.getText());
+		String tenThiSinh = this.textField_Ten.getText();
+		int queQuan = this.comboBox_them.getSelectedIndex() - 1;
+		tinhThanh tinh = tinhThanh.getTinhbyID(queQuan);
+		boolean gioiTinh = true;
+		if (this.btn_Nam.isSelected()) {
+			gioiTinh = true;
+		} else if (this.btn_Nu.isSelected()) {
+			gioiTinh = false;
+		}
+		Date ngaySinh = new Date(this.textField_ngSinh.getText());
+		float diem1 = Float.valueOf(this.textField_Diem1.getText());
+		float diem2 = Float.valueOf(this.textField_Diem2.getText());
+		float diem3 = Float.valueOf(this.textField_Diem3.getText());
+		thiSinh ts = new thiSinh(maThiSinh, tenThiSinh, tinh, ngaySinh, gioiTinh, diem1, diem3, diem2);
+		this.themSinhVien(ts);
+	}
+
+	public void thucHienTim() {
+		//Gọi hàm hủy tim kiểm để quay lại trạng thái ban đầu
+		this.thucHienHuyTim();
+		
+		int queQuan = this.comboBox_timKiem.getSelectedIndex() - 1;
+		String maTSTimKiem = this.textField_maThiSinh_timKiem.getText();
+		DefaultTableModel model_table = (DefaultTableModel) table.getModel();
+
+		int soLuongDong = model_table.getRowCount();
+
+		Set<Integer> cacIDCanXoa = new TreeSet<Integer>();
+		if (queQuan >= 0) {
+			tinhThanh tinh = tinhThanh.getTinhbyID(queQuan);
+			for (int i = 0; i < soLuongDong; i++) {
+				String tenTinhDaChon = model_table.getValueAt(i, 2) + "";
+				String id = model_table.getValueAt(i, 0) + "";
+				if (!tenTinhDaChon.equals(tinh.getTenTinh())) {
+					cacIDCanXoa.add(Integer.valueOf(id));
+				}
+			}
+		}
+		if (maTSTimKiem.length() > 0) {
+			for (int i = 0; i < soLuongDong; i++) {
+				String id = model_table.getValueAt(i, 0) + "";
+				if (!id.equals(maTSTimKiem)) {
+					cacIDCanXoa.add(Integer.valueOf(id));
+				}
+			}
+		}
+		for (Integer id : cacIDCanXoa) {
+			soLuongDong = model_table.getRowCount();
+			for (int i = 0; i < soLuongDong; i++) {
+				String idTrongTable = model_table.getValueAt(i, 0) + "";
+				if (idTrongTable.equals(id.toString())) {
+					try {
+						model_table.removeRow(i);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					break;
+				}
+			}
+		}
+	}
+
+	public void thucHienHuyTim() {
+		while(true) {
+			DefaultTableModel model_table = (DefaultTableModel) table.getModel();
+			int soLuongDong = model_table.getRowCount();
+			if(soLuongDong == 0) {
+				break;
+			}else {
+				try {
+					model_table.removeRow(0);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		for (thiSinh ts : this.qlsv.getDsts()) {
+			this.themThiSinhVaoTable(ts);
+		}
+	}
+
+	public void About() {
+		JOptionPane.showMessageDialog(this, "Đây là chương trình quản lý thí sinh");
+	}
+
+	public void saveFile(String file){
+		try {
+			this.qlsv.setTenFile(file);
+			FileOutputStream fos = new FileOutputStream(file);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			for (thiSinh ts : this.qlsv.getDsts()) {
+				oos.writeObject(ts);
+			}
+			oos.flush();
+			oos.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void SaveFile() {
+		JFileChooser fc = new JFileChooser();
+		if (this.qlsv.getTenFile().length() > 0) {
+			saveFile(this.qlsv.getTenFile());
+		} else {
+			int returnVal = fc.showSaveDialog(this);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				File file = fc.getSelectedFile();
+				saveFile(file.getAbsolutePath());
+			}
+		}
+	}
+
+	public void openFile(String file) {
+		try {
+			this.qlsv.setTenFile(file);
+			FileInputStream fis = new FileInputStream(file);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			ArrayList<thiSinh> ds = new ArrayList<thiSinh>();
+			thiSinh ts = null;
+			while(ts = ois.readObject() != null) {
+				ds.add(ts);
+			}
+			ois.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void OpenFile() {
+		JFileChooser fc = new JFileChooser();
+			int returnVal = fc.showOpenDialog(this);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				File file = fc.getSelectedFile();
+				openFile(file.getAbsoluteFile());
+			}
+		}
+
+	public void ExitApp() {
+		int luaChon = JOptionPane.showConfirmDialog(this,
+				"Bạn đã lưu file chưa?",
+				"Exit",
+				JOptionPane.YES_NO_OPTION);
+		if(luaChon == JOptionPane.YES_OPTION) {
+			System.exit(0);
+		}
+	}
+
+	
+	
+
+}

@@ -1,0 +1,10 @@
+1. Kế thừa trong lập trình Java:
+	Inheritance
+	Kế thừa trong Java: là một cơ chế trong đó một đối tượng con có được các thuộc tính hành vi thuộc
+	tính của đối tương cha
+	Trong Java không có đa kế thừa
+	Có ba kiểu kế thừa:
+	+ Single
+	+ Multilevel
+	+ Hirearchical
+	

@@ -1,0 +1,7 @@
+package utilz;
+
+public class Constansts {
+	public static class PlayerConstants{
+		public static final int RUNNING = 0;
+	}
+}

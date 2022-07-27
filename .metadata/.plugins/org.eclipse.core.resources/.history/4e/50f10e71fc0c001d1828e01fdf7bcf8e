@@ -1,0 +1,13 @@
+package test;
+
+import javax.swing.UIManager;
+
+import model.quanLySV;
+import view.giaoDienQuanLySV;
+
+public class test {
+	public static void main(String[] args) {
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		new giaoDienQuanLySV();
+	}
+}

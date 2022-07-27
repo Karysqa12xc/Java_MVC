@@ -1,0 +1,14 @@
+package model;
+
+import java.sql.Date;
+
+public class thiSinh extends tinhThanh{
+	private int maThiSinh;
+	private String tenThiSinh;
+	private tinhThanh queQuan;
+	private Date namSinh;
+	private boolean gioiTinh;
+	private float diemToan;
+	
+	
+}

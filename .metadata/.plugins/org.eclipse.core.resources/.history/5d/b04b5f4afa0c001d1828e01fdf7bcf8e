@@ -1,0 +1,40 @@
+package model;
+
+import java.util.ArrayList;
+
+public class quanLySV{
+	private ArrayList<thiSinh> dsts;
+
+	public quanLySV() {
+		this.dsts = new ArrayList<thiSinh>();
+	}
+	
+	
+	public quanLySV(ArrayList<thiSinh> dsts) {
+		this.dsts = dsts;
+	}
+
+	public ArrayList<thiSinh> getDsts() {
+		return dsts;
+	}
+
+	public void setDsts(ArrayList<thiSinh> dsts) {
+		this.dsts = dsts;
+	}
+
+	@Override
+	public String toString() {
+		return "quanLySV [dsts=" + dsts + "]";
+	}
+	
+	
+	public void insert(thiSinh thiSinh) {
+		this.dsts.add(thiSinh);
+	}
+	
+	public void delete(thiSinh thiSinh) {
+		this.dsts.remove(thiSinh);
+	}
+	
+	
+}

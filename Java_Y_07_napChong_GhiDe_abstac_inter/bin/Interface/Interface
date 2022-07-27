@@ -1,0 +1,5 @@
+Một Interface trong java là một bản thiết kết của một lớp
+Nó chỉ có các phương thức trừu tượng và các hằng số 
+Tất cả các hằng số được mặc định là ở dạng public static final
+Tương tự như lớp abstract, nó không thể được khởi tạo thành đối tượng
+Mục đích: để có gắng thu được tính trừu tường hoàn toàn và đa kế thừa

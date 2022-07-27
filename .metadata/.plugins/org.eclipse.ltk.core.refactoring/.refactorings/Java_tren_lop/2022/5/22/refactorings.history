@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;Chuong_4.TreeSet&apos; to &apos;TreeSetExample&apos;&#x0D;&#x0A;- Original project: &apos;Java_Tren_Lop&apos;&#x0D;&#x0A;- Original element: &apos;Chuong_4.TreeSet&apos;&#x0D;&#x0A;- Renamed element: &apos;Chuong_4.TreeSetExample&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;TreeSet&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/&lt;Chuong_4{TreeSet.java[TreeSet" matchStrategy="1" name="TreeSetExample" qualified="false" references="true" similarDeclarations="false" stamp="1653291859039" textual="false" version="1.0"/>
+</session>

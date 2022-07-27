@@ -1,0 +1,56 @@
+package controller;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+
+import model.thiSinh;
+import model.tinhThanh;
+import view.giaoDienQuanLySV;
+
+public class dieuKienGiaoDien implements ActionListener {
+	private giaoDienQuanLySV view;
+
+	public dieuKienGiaoDien(giaoDienQuanLySV view) {
+		this.view = view;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String src = e.getActionCommand();
+		if(src.equals("Thêm")) {
+			this.view.xoaFrom();
+			this.view.qlsv.setLuaChon("Thêm");
+		}else if(src.equals("Lưu")) {
+			try {
+				int maThiSinh = Integer.valueOf(this.view.textField_ID.getText());
+				String tenThiSinh = this.view.textField_Ten.getText();
+				int queQuan = this.view.comboBox_them.getSelectedIndex();
+				tinhThanh tinh = tinhThanh.getTinhbyID(queQuan);
+				Date namSinh = new Date(this.view.textField_ngSinh.getText());
+				boolean gioiTinh = true;
+				String chonGioiTinh = this.view.buttonGroup.getSelection() + "";
+				if(chonGioiTinh.equals("Nam")) {
+					gioiTinh = true;
+				}else if(chonGioiTinh.equals("Nữ")) {
+					gioiTinh = false;
+				}
+				float diem1 = Float.valueOf(this.view.textField_Diem1.getText());
+				float diem2 = Float.valueOf(this.view.textField_Diem2.getText());
+				float diem3 = Float.valueOf(this.view.textField_Diem3.getText());
+				thiSinh ts = new thiSinh(maThiSinh, tenThiSinh, tinh, namSinh, gioiTinh, diem1, diem3, diem2);
+				if(this.view.qlsv.getLuaChon().equals("") || this.view.qlsv.getLuaChon().equals("Thêm")) {
+					this.view.themSinhVien(ts);
+				}else if(this.view.qlsv.getLuaChon().equals("Cập nhật")){
+					this.view.capNhatSinhVien(ts);
+				}
+			} catch (NumberFormatException e1) {
+				e1.printStackTrace();
+			}
+		}
+		else if (src.equals("Exit")) {
+			System.exit(0);
+		}
+	}
+
+}

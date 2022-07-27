@@ -1,0 +1,52 @@
+package controller;
+
+import java.awt.JobAttributes;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+
+import javax.swing.JOptionPane;
+
+import model.thiSinh;
+import model.tinhThanh;
+import view.giaoDienQuanLySV;
+
+public class dieuKienGiaoDien implements ActionListener {
+	private giaoDienQuanLySV view;
+
+	public dieuKienGiaoDien(giaoDienQuanLySV view) {
+		this.view = view;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String src = e.getActionCommand();
+		if (src.equals("Thêm")) {
+			this.view.xoaFrom();
+			this.view.qlsv.setLuaChon("Thêm");
+		} else if (src.equals("Lưu")) {
+			try {
+				this.view.thucHienThem();
+			} catch (NumberFormatException e1) {
+				e1.printStackTrace();
+			}
+		} else if (src.equals("Cập nhật")) {
+			this.view.capNhatSinhVien();
+		}else if(src.equals("Xóa")) {
+			this.view.thucHienXoa();
+		}else if(src.equals("Hủy bỏ")) {
+			this.view.xoaFrom();
+		}else if(src.equals("Tìm")) {
+			this.view.thucHienTim();
+		}else if(src.equals("Hủy Tìm")) {
+			this.view.thucHienHuyTim();
+		}else if (src.equals("Exit")) {
+			System.exit(0);
+		}else if(src.equals("About Me")) {
+			this.view.About();
+		}else if(src.equals("Open")) {
+			this.view.OpenFile();
+		}
+	}
+
+}

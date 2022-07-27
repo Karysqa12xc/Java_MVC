@@ -1,0 +1,88 @@
+package model;
+
+import java.sql.Date;
+
+public class thiSinh extends tinhThanh{
+	private int maThiSinh;
+	private String tenThiSinh;
+	private tinhThanh queQuan;
+	private Date namSinh;
+	private boolean gioiTinh;// True giới tính Nam, false giới tính Nữ
+	private float diem1, diem3, diem2;
+
+	public thiSinh() {
+		this.maThiSinh = maThiSinh;
+		this.tenThiSinh = tenThiSinh;
+		this.queQuan = queQuan;
+		this.namSinh = namSinh;
+		this.gioiTinh = gioiTinh;
+		this.diem1 = diem1;
+		this.diem2 = diem2;
+		this.diem3 = diem3;
+	}
+
+	public int getMaThiSinh() {
+		return maThiSinh;
+	}
+
+	public void setMaThiSinh(int maThiSinh) {
+		this.maThiSinh = maThiSinh;
+	}
+
+	public String getTenThiSinh() {
+		return tenThiSinh;
+	}
+
+	public void setTenThiSinh(String tenThiSinh) {
+		this.tenThiSinh = tenThiSinh;
+	}
+
+	public tinhThanh getQueQuan() {
+		return queQuan;
+	}
+
+	public void setQueQuan(tinhThanh queQuan) {
+		this.queQuan = queQuan;
+	}
+
+	public Date getNamSinh() {
+		return namSinh;
+	}
+
+	public void setNamSinh(Date namSinh) {
+		this.namSinh = namSinh;
+	}
+
+	public boolean isGioiTinh() {
+		return gioiTinh;
+	}
+
+	public void setGioiTinh(boolean gioiTinh) {
+		this.gioiTinh = gioiTinh;
+	}
+
+	public float getDiem1() {
+		return diem1;
+	}
+
+	public void setDiem1(float diem1) {
+		this.diem1 = diem1;
+	}
+
+	public float getDiem3() {
+		return diem3;
+	}
+
+	public void setDiem3(float diem3) {
+		this.diem3 = diem3;
+	}
+
+	public float getDiem2() {
+		return diem2;
+	}
+
+	public void setDiem2(float diem2) {
+		this.diem2 = diem2;
+	}
+
+}

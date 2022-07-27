@@ -1,0 +1,14 @@
+package utilz;
+
+public class Constansts {
+	public static class PlayerConstants{
+		public static final int RUNNING = 0;
+		public static final int IDLE = 1;
+		public static final int JUMP = 1;
+		public static final int FALLING = 1;
+		public static final int  HIT = 1;
+		public static final int ATTACK_1 = 6;
+		public static final ATTACK_JUMP_1 = 1;
+		public static final int ATTACK_JUMP_2 = 1;
+	}
+}

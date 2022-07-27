@@ -1,0 +1,26 @@
+package model;
+
+import java.sql.Date;
+
+public class thiSinh extends tinhThanh{
+	private int maThiSinh;
+	private String tenThiSinh;
+	private tinhThanh queQuan;
+	private Date namSinh;
+	private boolean gioiTinh;
+	private float diemToan, diemLy, diemHoa;
+	public thiSinh() {
+		this.maThiSinh = maThiSinh;
+		this.tenThiSinh = tenThiSinh;
+		this.queQuan = queQuan;
+		this.namSinh = namSinh;
+		this.gioiTinh = gioiTinh;
+		this.diemToan = diemToan;
+		this.diemLy = diemLy;
+		this.diemHoa = diemHoa;
+	}
+	
+	
+	
+	
+}

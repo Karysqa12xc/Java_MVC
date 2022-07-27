@@ -1,0 +1,59 @@
+package model;
+
+import java.util.ArrayList;
+
+public class quanLySV{
+	private ArrayList<thiSinh> dsts;
+	private String luaChon;
+	
+	public quanLySV() {
+		this.dsts = new ArrayList<thiSinh>();
+		this.luaChon = "";
+	}
+	
+	public quanLySV(ArrayList<thiSinh> dsts, String luaChon) {
+		this.dsts = dsts;
+		this.luaChon = luaChon;
+	}
+
+
+
+
+	public ArrayList<thiSinh> getDsts() {
+		return dsts;
+	}
+
+	public void setDsts(ArrayList<thiSinh> dsts) {
+		this.dsts = dsts;
+	}
+
+	@Override
+	public String toString() {
+		return "quanLySV [dsts=" + dsts + "]";
+	}
+	
+	
+	public void insert(thiSinh thiSinh) {
+		this.dsts.add(thiSinh);
+	}
+	
+	public void delete(thiSinh thiSinh) {
+		this.dsts.remove(thiSinh);
+	}
+	
+	public void update(thiSinh thiSinh) {
+		this.dsts.remove(thiSinh);
+		this.dsts.add(thiSinh);
+	}
+
+	public String getLuaChon() {
+		return luaChon;
+	}
+
+	public void setLuaChon(String luaChon) {
+		this.luaChon = luaChon;
+	}
+
+	
+	
+}
